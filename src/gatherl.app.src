@@ -1,0 +1,13 @@
+{application, gatherl, [
+	{description, "Hellooo"},
+	{vsn, "0.1.0"},
+	{modules, []},
+	{registered, []},
+	{applications, [
+		kernel,
+		stdlib,
+        cowboy
+	]},
+	{mod, {gatherl_app, []}},
+    {env, [{http_port, 8081}]}
+]}.
