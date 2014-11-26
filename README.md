@@ -14,7 +14,7 @@ $ make
 To start the release in the foreground:
 
 ``` bash
-$ ./_rel/hello_world_example/bin/gatherl console
+$ ./_rel/gatherl_release/bin/gatherl_release console
 ```
 
 Then point your browser at [http://localhost:8081](http://localhost:8081).
