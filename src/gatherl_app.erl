@@ -6,16 +6,23 @@
 
 start(_Type, _Args) ->
 	Port = port(),
-    Dispatch = cowboy_router:compile([
-        {'_', [{"/", hello_handler, []}]}
-    ]),	
-    cowboy:start_http(my_http_listener, 100, [{port, Port}],
+    Routes = routes(),
+    Dispatch = cowboy_router:compile([{'_', Routes}]),	
+        {ok, _} = cowboy:start_http(http, 100, [{port, Port}],
         [{env, [{dispatch, Dispatch}]}]
     ),
     gatherl_sup:start_link().
 
 stop(_State) ->
     ok.
+
+routes() ->
+    [
+            {"/hello", hello_handler, []},
+            {"/websocket", ws_handler, []},
+            {"/", cowboy_static, {priv_file, gatherl, "index.html"}},
+            {"/static/[...]", cowboy_static, {priv_dir, gatherl, "static"}}   
+    ].
 
 port() ->
 	case os:getenv("PORT") of
